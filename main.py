@@ -12,6 +12,8 @@ import telebot
 options2 = webdriver.ChromeOptions()
 options2.add_argument('headless')
 driver = webdriver.Chrome("chromedriver", options=options2)
+
+
 # bot = telebot.TeleBot("1272517220:AAGp0kXsJc7Ne7qhZudC0EuiF3z1qnUhj4Q")
 
 
@@ -27,6 +29,7 @@ base_url = "https://2gis.kz/nur_sultan/search/qmobot"
 
 def dojob(chat_id):
     driver.get(base_url)
+    print("Got url")
     time.sleep(2)
     data = []
 
