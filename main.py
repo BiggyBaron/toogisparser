@@ -9,10 +9,10 @@ import sys
 import telebot
 
 
-options2 = webdriver.ChromeOptions()
-options2.add_argument('headless')
-driver = webdriver.Chrome("chromedriver", options=options2)
-
+# options2 = webdriver.ChromeOptions()
+# options2.add_argument('headless')
+# driver = webdriver.Chrome("chromedriver", options=options2)
+driver = webdriver.Chrome("chromedriver")
 
 # bot = telebot.TeleBot("1272517220:AAGp0kXsJc7Ne7qhZudC0EuiF3z1qnUhj4Q")
 
