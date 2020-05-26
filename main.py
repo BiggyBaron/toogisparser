@@ -47,8 +47,8 @@ def dojob(chat_id):
             time.sleep(2)
             name = driver.find_element_by_class_name("_1r7sat2").find_element_by_class_name("_oqoid").get_attribute('innerHTML')
             type = driver.find_element_by_class_name("_11eqcnu").find_element_by_class_name("_oqoid").get_attribute('innerHTML')
-            address = driver.find_element_by_class_name("_599hh").find_element_by_class_name("_15t9xwf").find_element_by_class_name("_49kxlr").find_element_by_class_name("_13eh3hvq").get_attribute('innerHTML')
-            data = data + data2
+            print("name is: " + str(name))
+            print("type is: " + str(type))
 
     print(len(data))
 
