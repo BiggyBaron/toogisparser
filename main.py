@@ -28,7 +28,7 @@ base_url = "https://2gis.kz/almaty/search/%D1%88%D0%BA%D0%BE%D0%BB%D0%B0%20%D0%B
 def dojob(chat_id):
     driver.get(base_url)
     time.sleep(2)
-    data = driver.find_elements_by_class_name("_1h3cgic").get_attribute('innerHTML')
+    data = driver.find_elements_by_class_name("_1h3cgic")#.get_attribute('innerHTML')
     
     print(len(data))
 
