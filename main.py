@@ -28,31 +28,45 @@ base_url = "https://2gis.kz/nur_sultan/search/qmobot"
 def dojob(chat_id):
     driver.get(base_url)
     time.sleep(2)
-    data = driver.find_elements_by_class_name("_1h3cgic")#.get_attribute('innerHTML')
+    data = []
+
+
+    new_flags = driver.find_elements_by_class_name("_1h3cgic").get_attribute('href')
+    if len(new_flags) > 0:
+        for flag in flags:
+            data2 = base_url.split("/search/")[0] + str(flag.get_attribute('href'))
+            data.append(data2)
     
     others = driver.find_elements_by_class_name("_1hs4dnvh")
 
+    print("Len of data is: " + str(len(data)))
+    print("Len of others is: " + str(len(others)))
+
+    data_urls = []
+    others_urls = []
+
     if len(others) > 0 :
         for el in others:
-            url = el.get_attribute('href')
+            url = base_url.split("/search/")[0] + str(el.get_attribute('href'))
+            others_urls.append(url)
+
+        for url in others_urls:
             driver.get(url)
             time.sleep(2)
-            data2 = driver.find_elements_by_class_name("_1h3cgic")
-            data = data + data2
-
-    if len(data) > 0:
-        for el in data:
-            url = el.get_attribute('href')
-            driver.get(url)
-            time.sleep(2)
-            name = driver.find_element_by_class_name("_1r7sat2").find_element_by_class_name("_oqoid").get_attribute('innerHTML')
-            type = driver.find_element_by_class_name("_11eqcnu").find_element_by_class_name("_oqoid").get_attribute('innerHTML')
-            print("name is: " + str(name))
-            print("type is: " + str(type))
-
-    print(len(data))
+            flags = driver.find_elements_by_class_name("_1h3cgic")
+            for flag in flags:
+                data2 = base_url.split("/search/")[0] + str(flag.get_attribute('href'))
+                data.append(data2)
+    
+    print(data)
 
 
 if __name__=="__main__":
     dojob("536244426")
     # bot.polling()
+
+
+    # driver.get(url)
+    #         time.sleep(2)
+    #         data2 = driver.find_elements_by_class_name("_1h3cgic")
+    #         data = data + data2
