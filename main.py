@@ -40,6 +40,15 @@ def dojob(chat_id):
             data2 = driver.find_elements_by_class_name("_1h3cgic")
             data = data + data2
 
+    if len(data) > 0:
+        for el in data:
+            url = el.get_attribute('href')
+            driver.get(url)
+            time.sleep(2)
+            name = driver.find_element_by_class_name("_1r7sat2").find_element_by_class_name("_oqoid").get_attribute('innerHTML')
+            type = driver.find_element_by_class_name("_11eqcnu").find_element_by_class_name("_oqoid").get_attribute('innerHTML')
+            address = driver.find_element_by_class_name("_599hh").find_element_by_class_name("_15t9xwf").find_element_by_class_name("_49kxlr").find_element_by_class_name("_13eh3hvq").get_attribute('innerHTML')
+            data = data + data2
 
     print(len(data))
 
