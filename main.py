@@ -30,6 +30,17 @@ def dojob(chat_id):
     time.sleep(2)
     data = driver.find_elements_by_class_name("_1h3cgic")#.get_attribute('innerHTML')
     
+    others = driver.find_elements_by_class_name("_1hs4dnvh")
+
+    if len(others) > 0 :
+        for el in others:
+            url = el.get_attribute('href')
+            driver.get(url)
+            time.sleep(2)
+            data2 = driver.find_elements_by_class_name("_1h3cgic")
+            data = data + data2
+
+
     print(len(data))
 
 
