@@ -73,10 +73,10 @@ def analyze_page(url):
             geo = info.text
             print(geo)
         elif "tel" in info.get_attribute("href"):
-            tel = info.text.split("tel:")[1]
+            tel = info.text
             print(tel)
         elif "mailto:" in info.get_attribute("href"):
-            mail = info.text.split("mailto:")[1]
+            mail = info.text
             print(mail)
 
 
