@@ -21,10 +21,13 @@ bot = telebot.TeleBot("1272517220:AAGp0kXsJc7Ne7qhZudC0EuiF3z1qnUhj4Q")
 
 @bot.message_handler(content_types=['text'])
 def start_message(message):
-    try:
-        dojob(message.chat.id, message.text)
-    except:
-        bot.send_message(message.chat.id, "Неправильный URL")
+    print("Message is: " + message.text)
+    print("User is: " + str(message.chat.id))
+    dojob(message.chat.id, message.text)
+    # try:
+    #     dojob(message.chat.id, message.text)
+    # except:
+    #     bot.send_message(message.chat.id, "Неправильный URL")
 
 
 def dojob(id, base_url):
