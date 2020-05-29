@@ -7,6 +7,8 @@ import os
 import datetime
 import sys
 import telebot
+from copy import deepcopy
+import pandas as pd
 
 
 options2 = webdriver.ChromeOptions()
@@ -14,22 +16,18 @@ options2.add_argument('--no-sandbox')
 options2.add_argument('--headless')
 options2.add_argument('--disable-gpu')
 driver = webdriver.Chrome("chromedriver", options=options2)
-# driver = webdriver.Chrome("chromedriver")
-
-# bot = telebot.TeleBot("1272517220:AAGp0kXsJc7Ne7qhZudC0EuiF3z1qnUhj4Q")
+bot = telebot.TeleBot("1272517220:AAGp0kXsJc7Ne7qhZudC0EuiF3z1qnUhj4Q")
 
 
-# @bot.message_handler(commands=['now'])
-# def start_message(message):
-#     try:
-#         dojob(message.chat.id)
-#     except:
-#         bot.send_message(message.chat.id, "Какая-та ошибка")
+@bot.message_handler(content_types=['text'])
+def start_message(message):
+    try:
+        dojob(message.chat.id, message.text)
+    except:
+        bot.send_message(message.chat.id, "Неправильный URL")
 
 
-base_url = "https://2gis.kz/nur_sultan/search/%D0%BF%D0%BE%D0%BB%D0%B8%D1%86%D0%B8%D1%8F"
-
-def dojob(put_url_here):
+def dojob(id, base_url):
     driver.get(base_url)
     data = []
     new_flags = driver.find_elements_by_class_name("_1h3cgic")
@@ -52,44 +50,40 @@ def dojob(put_url_here):
             for flag in flags:
                 data2 = str(flag.find_element_by_class_name("_13ptbeu").get_attribute('href')).split("?")[0]
                 data.append(data2)
+    bot.send_message(id, "Короче тут компаний ровно: " + str(len(data)) + " и я пошел ебашить")
+    finds = []
+    for url in data:
+        finds.append(analyze_page(url))
     
-
-    
-    driver.close()
-    print(data)
+    df = pd.DataFrame.from_dict(finds)
+    df.to_excel('finds.xlsx')
+    bot.send_document(id, "finds.xlsx")
 
 
 def analyze_page(url):
-    driver.close()
+    value = {
+        "name": "",
+        "info": "",
+        "tel": "",
+        "email": "",
+        "address": ""
+    }
+
     driver.get(url)
     names = driver.find_elements_by_class_name("_oqoid")
-    name = names[0].text
-    details = names[1].text
-    print(name)
-    print(details)
+    value["info"] = names[1].text
+    value["name"] = name[0].text
     infos = driver.find_elements_by_class_name("_84s065h")
 
     for info in infos:
         if "geo" in info.get_attribute("href"):
-            geo = info.text
-            print(geo)
+            value["address"] = info.text
         elif "tel" in info.get_attribute("href"):
-            tel = info.get_attribute("href").split("tel:")[1]
-            print(tel)
+            value["tel"] = info.get_attribute("href").split("tel:")[1]
         elif "mailto:" in info.get_attribute("href"):
-            mail = info.text
-            print(mail)
-    
-    driver.close()
+            value["email"] = info.text
 
+    return value.deepcopy()
 
 if __name__=="__main__":
-    analyze_page("https://2gis.kz/nur_sultan/firm/70000001029448569")
-    # dojob("536244426")
-    # bot.polling()
-
-
-    # driver.get(url)
-    #         time.sleep(2)
-    #         data2 = driver.find_elements_by_class_name("_1h3cgic")
-    #         data = data + data2
+    bot.polling(none_stop=True)
