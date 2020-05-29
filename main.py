@@ -46,6 +46,7 @@ def dojob(chat_id):
 
     print("Len of data is: " + str(len(data)))
     print("Len of others is: " + str(len(others)))
+    print(data)
 
     data_urls = []
     others_urls = []
@@ -57,13 +58,14 @@ def dojob(chat_id):
 
         for url in others_urls:
             driver.get(url)
-            time.sleep(2)
             flags = driver.find_elements_by_class_name("_1h3cgic")
             for flag in flags:
                 data2 = base_url.split("/search/")[0] + str(flag.get_attribute('href'))
                 data.append(data2)
     
-    print(data)
+    
+
+    
 
 
 if __name__=="__main__":
