@@ -59,7 +59,7 @@ def dojob(put_url_here):
 
 
 def analyze_page(url):
-    driver.get(base_url)
+    driver.get(url)
     names = driver.find_elements_by_class_name("_oqoid")
     for name in names:
         print(name.text)
