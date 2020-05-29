@@ -86,7 +86,7 @@ def analyze_page(url):
         elif "mailto:" in info.get_attribute("href"):
             value["email"] = info.text
 
-    return value.deepcopy()
+    return deepcopy(value)
 
 if __name__=="__main__":
     bot.polling(none_stop=True)
