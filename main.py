@@ -60,8 +60,9 @@ def dojob(put_url_here):
 
 def analyze_page(url):
     driver.get(base_url)
-    name = driver.find_element_by_class_name("_1dcp9fc").find_element_by_class_name("_1r7sat2").find_element_by_class_name("_oqoid").get_attribute('innerHTML')
-    print(name)
+    names = driver.find_elements_by_class_name("_oqoid")
+    for name in names:
+        print(name.text())
 
 
 if __name__=="__main__":
