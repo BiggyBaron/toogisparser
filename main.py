@@ -61,8 +61,19 @@ def dojob(put_url_here):
 def analyze_page(url):
     driver.get(url)
     names = driver.find_elements_by_class_name("_oqoid")
-    for name in names:
-        print(name.text)
+    name = names[0]
+    details = names[1]
+    print(name)
+    print(details)
+    tels = driver.find_elements_by_partial_link_text("tel:")
+    for tel in tels:
+        tel.get_attribute("href").split("tel:")[1]
+        print(tel)
+    mails = driver.find_elements_by_partial_link_text("mailto:")
+    for mail in mails:
+        mail.get_attribute("href").split("mailto:")[1]
+        print(mail)
+    
 
 
 if __name__=="__main__":
