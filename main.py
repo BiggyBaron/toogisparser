@@ -32,13 +32,13 @@ def dojob(chat_id):
     driver.get(base_url)
     print("Got url")
 
-    time.sleep(2)
+    # time.sleep(2)
     data = []
 
 
     new_flags = driver.find_elements_by_class_name("_1h3cgic")
     if len(new_flags) > 0:
-        for flag in flags:
+        for flag in new_flags:
             data2 = base_url.split("/search/")[0] + str(flag.get_attribute('href'))
             data.append(data2)
     
