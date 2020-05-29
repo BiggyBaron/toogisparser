@@ -60,7 +60,8 @@ def dojob(put_url_here):
 
 def analyze_page(url):
     driver.get(base_url)
-    name = driver.find_element_by_class_name("_1dcp9fc").find_element_by_class_name("_1r7sat2").find_element_by_class_name("_oqoid").innerHTML()
+    print(driver.get_attribute('innerHTML'))
+    name = driver.find_element_by_class_name("_1dcp9fc").find_element_by_class_name("_1r7sat2").find_element_by_class_name("_oqoid").get_attribute('innerHTML')
     print(name)
 
 
