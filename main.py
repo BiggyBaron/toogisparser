@@ -62,7 +62,7 @@ def analyze_page(url):
     driver.get(base_url)
     names = driver.find_elements_by_class_name("_oqoid")
     for name in names:
-        print(name.text())
+        print(name)
 
 
 if __name__=="__main__":
