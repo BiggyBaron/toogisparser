@@ -62,23 +62,26 @@ def dojob(put_url_here):
 def analyze_page(url):
     driver.get(url)
     names = driver.find_elements_by_class_name("_oqoid")
-    name = names[0]
-    details = names[1]
+    name = names[0].text
+    details = names[1].text
     print(name)
     print(details)
-    tels = driver.find_elements_by_partial_link_text("tel:")
-    for tel in tels:
-        tel.get_attribute("href").split("tel:")[1]
-        print(tel)
-    mails = driver.find_elements_by_partial_link_text("mailto:")
-    for mail in mails:
-        mail.get_attribute("href").split("mailto:")[1]
-        print(mail)
-    
+    infos = driver.find_elements_by_class_name("_84s065h")
+
+    for info in infos:
+        if "geo" in info.get_attribute("href"):
+            geo = info.text
+            print(geo)
+        elif "tel" in info.get_attribute("href"):
+            tel = info.text.split("tel:")[1]
+            print(tel)
+        elif "mailto:" in in info.get_attribute("href"):
+            mail = info.text.split("mailto:")[1]
+            print(mail)
 
 
 if __name__=="__main__":
-    analyze_page("https://2gis.kz/nur_sultan/firm/70000001041671674")
+    analyze_page("https://2gis.kz/nur_sultan/firm/70000001029448569")
     # dojob("536244426")
     # bot.polling()
 
