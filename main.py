@@ -34,7 +34,7 @@ def dojob(put_url_here):
     new_flags = driver.find_elements_by_class_name("_1h3cgic")
     if len(new_flags) > 0:
         for flag in new_flags:
-            data2 = str(flag.find_element_by_class_name("_13ptbeu").get_attribute('href'))
+            data2 = str(flag.find_element_by_class_name("_13ptbeu").get_attribute('href')).split("?")[0]
             data.append(data2)
     
     others = driver.find_elements_by_class_name("_1hs4dnvh")
@@ -49,7 +49,7 @@ def dojob(put_url_here):
             driver.get(url)
             flags = driver.find_elements_by_class_name("_1h3cgic")
             for flag in flags:
-                data2 = str(flag.find_element_by_class_name("_13ptbeu").get_attribute('href'))
+                data2 = str(flag.find_element_by_class_name("_13ptbeu").get_attribute('href')).split("?")[0]
                 data.append(data2)
     
 
