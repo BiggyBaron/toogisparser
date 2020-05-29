@@ -12,6 +12,7 @@ import telebot
 options2 = webdriver.ChromeOptions()
 options2.add_argument('--no-sandbox')
 options2.add_argument('--headless')
+options2.add_argument('--disable-gpu')
 driver = webdriver.Chrome("chromedriver", options=options2)
 # driver = webdriver.Chrome("chromedriver")
 
