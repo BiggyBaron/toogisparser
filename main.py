@@ -28,15 +28,9 @@ driver = webdriver.Chrome("chromedriver", options=options2)
 
 base_url = "https://2gis.kz/nur_sultan/search/%D0%BF%D0%BE%D0%BB%D0%B8%D1%86%D0%B8%D1%8F"
 
-def dojob(chat_id):
-
+def dojob(put_url_here):
     driver.get(base_url)
-    print("Got url")
-
-    # time.sleep(2)
     data = []
-
-
     new_flags = driver.find_elements_by_class_name("_1h3cgic")
     if len(new_flags) > 0:
         for flag in new_flags:
@@ -44,14 +38,7 @@ def dojob(chat_id):
             data.append(data2)
     
     others = driver.find_elements_by_class_name("_1hs4dnvh")
-
-    print("Len of data is: " + str(len(data)))
-    print("Len of others is: " + str(len(others)))
-    print(data)
-
     others_urls = []
-
-    print("doing others")
     if len(others) > 0 :
         for el in others:
             url = str(el.get_attribute('href'))
@@ -65,14 +52,21 @@ def dojob(chat_id):
                 data2 = str(flag.find_element_by_class_name("_13ptbeu").get_attribute('href'))
                 data.append(data2)
     
+
+    
     driver.close()
     print(data)
 
-    
+
+def analyze_page(url):
+    driver.get(base_url)
+    name = driver.find_element_by_class_name("_1dcp9fc").find_element_by_class_name("_1r7sat2").find_element_by_class_name("_oqoid").innerHTML()
+    print(name)
 
 
 if __name__=="__main__":
-    dojob("536244426")
+    analyze_page("https://2gis.kz/nur_sultan/firm/70000001041671674")
+    # dojob("536244426")
     # bot.polling()
 
 
