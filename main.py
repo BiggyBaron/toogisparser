@@ -22,7 +22,7 @@ bot = telebot.TeleBot("1272517220:AAGp0kXsJc7Ne7qhZudC0EuiF3z1qnUhj4Q")
 @bot.message_handler(content_types=['text'])
 def start_message(message):
     print("Message is: " + message.text)
-    print("User is: " + str(message.chat.id))
+    print("User is: " + str(message.from_user.id))
     dojob(message.chat.id, message.text)
     # try:
     #     dojob(message.chat.id, message.text)
@@ -75,7 +75,7 @@ def analyze_page(url):
     driver.get(url)
     names = driver.find_elements_by_class_name("_oqoid")
     value["info"] = names[1].text
-    value["name"] = name[0].text
+    value["name"] = names[0].text
     infos = driver.find_elements_by_class_name("_84s065h")
 
     for info in infos:
