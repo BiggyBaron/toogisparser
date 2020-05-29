@@ -26,7 +26,7 @@ driver = webdriver.Chrome("chromedriver", options=options2)
 #         bot.send_message(message.chat.id, "Какая-та ошибка")
 
 
-base_url = "https://2gis.kz/nur_sultan/search/qmobot"
+base_url = "https://2gis.kz/nur_sultan/search/%D0%BF%D0%BE%D0%BB%D0%B8%D1%86%D0%B8%D1%8F"
 
 def dojob(chat_id):
 
@@ -40,7 +40,7 @@ def dojob(chat_id):
     new_flags = driver.find_elements_by_class_name("_1h3cgic")
     if len(new_flags) > 0:
         for flag in new_flags:
-            data2 = base_url.split("/search/")[0] + str(flag.find_element_by_class_name("_13ptbeu").get_attribute('href'))
+            data2 = str(flag.find_element_by_class_name("_13ptbeu").get_attribute('href'))
             data.append(data2)
     
     others = driver.find_elements_by_class_name("_1hs4dnvh")
@@ -49,22 +49,24 @@ def dojob(chat_id):
     print("Len of others is: " + str(len(others)))
     print(data)
 
-    data_urls = []
     others_urls = []
 
+    print("doing others")
     if len(others) > 0 :
         for el in others:
-            url = base_url.split("/search/")[0] + str(el.get_attribute('href'))
-            others_urls.append(url)
+            url = str(el.get_attribute('href'))
+            if "search" in url and "page" in url:
+                others_urls.append(url)
 
         for url in others_urls:
             driver.get(url)
             flags = driver.find_elements_by_class_name("_1h3cgic")
             for flag in flags:
-                data2 = base_url.split("/search/")[0] + str(flag.get_attribute('href'))
+                data2 = str(flag.find_element_by_class_name("_13ptbeu").get_attribute('href'))
                 data.append(data2)
     
-    
+    driver.close()
+    print(data)
 
     
 
