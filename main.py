@@ -28,13 +28,15 @@ driver = webdriver.Chrome("chromedriver", options=options2)
 base_url = "https://2gis.kz/nur_sultan/search/qmobot"
 
 def dojob(chat_id):
+
     driver.get(base_url)
     print("Got url")
+
     time.sleep(2)
     data = []
 
 
-    new_flags = driver.find_elements_by_class_name("_1h3cgic").get_attribute('href')
+    new_flags = driver.find_elements_by_class_name("_1h3cgic")
     if len(new_flags) > 0:
         for flag in flags:
             data2 = base_url.split("/search/")[0] + str(flag.get_attribute('href'))
