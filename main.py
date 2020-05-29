@@ -60,6 +60,7 @@ def dojob(put_url_here):
 
 
 def analyze_page(url):
+    driver.close()
     driver.get(url)
     names = driver.find_elements_by_class_name("_oqoid")
     name = names[0].text
@@ -78,6 +79,8 @@ def analyze_page(url):
         elif "mailto:" in info.get_attribute("href"):
             mail = info.text
             print(mail)
+    
+    driver.close()
 
 
 if __name__=="__main__":
